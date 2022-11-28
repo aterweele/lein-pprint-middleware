@@ -1,0 +1,27 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/clojure:1.11.1
+    steps:
+      - checkout
+      - run: lein test
+  deploy:
+    docker:
+      - image: cimg/clojure:1.11.1
+    steps:
+      - checkout
+      - run: lein deploy
+
+workflows:
+  test:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: /main/
+          context: clojars
