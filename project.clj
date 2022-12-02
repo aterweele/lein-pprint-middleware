@@ -1,4 +1,4 @@
-(defproject name.atw/nrepl-pprint-middleware "0.1.0-SNAPSHOT"
+(defproject name.atw/nrepl-pprint-middleware "0.1.0"
   :description
   "An nREPL middleware that causes output to be pretty-printed."
   :url "https://github.com/aterweele/lein-pprint-middleware"
