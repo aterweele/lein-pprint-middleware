@@ -9,4 +9,12 @@
   :deploy-repositories [["clojars" {:username "atw"
                                     :password :env/deploy_token}]
                         ["releases" :clojars]
-                        ["snapshots" :clojars]])
+                        ["snapshots" :clojars]]
+  ;; the default `:release-tasks`, but don't lein deploy (that is done
+  ;; in CI) and don't VCS push (rather, do that manually)
+  :release-tasks [["vcs" "assert-committed"]
+                  ["change" "version" "leiningen.release/bump-version" "release"]
+                  ["vcs" "commit"]
+                  ["vcs" "tag"]
+                  ["change" "version" "leiningen.release/bump-version"]
+                  ["vcs" "commit"]])
