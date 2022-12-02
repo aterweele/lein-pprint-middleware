@@ -18,8 +18,9 @@ workflows:
   main:
     jobs:
       - test:
-          tags:
-            only: /.*/
+          filters:
+            tags:
+              only: /.*/
       - deploy:
           requires:
             - test
