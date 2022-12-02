@@ -15,13 +15,17 @@ jobs:
       - run: lein deploy
 
 workflows:
-  test:
+  main:
     jobs:
-      - test
+      - test:
+          tags:
+            only: /.*/
       - deploy:
           requires:
             - test
           filters:
             branches:
               only: /main/
+            tags:
+              only: /.*/
           context: clojars
