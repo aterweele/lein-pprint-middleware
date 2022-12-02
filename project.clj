@@ -7,9 +7,11 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [nrepl "0.8.3"]]
   :deploy-repositories [["clojars" {:username "atw"
-                                    :password :env/deploy_token}]
+                                    :password :env/deploy_token
+                                    :sign-releases false}]
                         ["releases" :clojars]
                         ["snapshots" :clojars]]
+  
   ;; the default `:release-tasks`, but don't lein deploy (that is done
   ;; in CI) and don't VCS push (rather, do that manually)
   :release-tasks [["vcs" "assert-committed"]
