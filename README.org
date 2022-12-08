@@ -1,0 +1,41 @@
+nrepl-pprint-middleware is an [[https://nrepl.org/nrepl/design/middleware.html][nREPL middleware]] that uses
+[[https://clojure.github.io/clojure/clojure.pprint-api.html][clojure.pprint]] to pretty-print all REPL results. This improves
+readability for large and deeply-nested collections.
+
+You may find nrepl-pprint-middleware useful if your nREPL tooling
+doesn't pretty-print. I use it with [[https://github.com/sanel/monroe/][monroe]], for example. You may also
+find it useful if you start an nREPL in production and connect to it
+with ~lein repl :connect ...~.
+
+[[https://clojars.org/name.atw/nrepl-pprint-middleware][file:https://img.shields.io/clojars/v/name.atw/nrepl-pprint-middleware.svg]]
+
+* Installation for local development
+
+Add to your =~/.lein/profiles.clj=:
+
+#+begin_src clojure
+  {:user {:plugins [[name.atw/nrepl-pprint-middleware version-goes-here]]
+          :repl-options {:nrepl-middleware [nrepl-pprint-middleware.pprint/wrap-pprint]}}}
+#+end_src
+* Installation for production
+If you [[https://nrepl.org/nrepl/usage/server.html#embedding-nrepl][start an nREPL in your deployed application]], you can also add
+nrepl-pprint-middleware to your production nREPL. Add it to your
+Leiningen dependencies:
+
+#+begin_src clojure
+  [name.atw/nrepl-pprint-middleware version-goes-here]
+#+end_src
+
+Then somewhere in your application, start an nREPL with
+nrepl-pprint-middleware:
+
+#+begin_src clojure
+  (ns ...
+    (:require [nrepl.server :as nrepl]
+              nrepl-pprint-middleware.pprint))
+
+  (defonce nrepl-server
+    (nrepl/start-server
+     :bind ... :port ...
+     :handler (server/default-handler nrepl-pprint-middleware.pprint/wrap-pprint)))
+#+end_src
