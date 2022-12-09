@@ -14,7 +14,7 @@ with ~lein repl :connect ...~.
 Add to your =~/.lein/profiles.clj=:
 
 #+begin_src clojure
-  {:user {:plugins [[name.atw/nrepl-pprint-middleware version-goes-here]]
+  {:user {:dependencies [[name.atw/nrepl-pprint-middleware version-goes-here]]
           :repl-options {:nrepl-middleware [nrepl-pprint-middleware.pprint/wrap-pprint]}}}
 #+end_src
 * Installation for production
