@@ -37,5 +37,5 @@ nrepl-pprint-middleware:
   (defonce nrepl-server
     (nrepl/start-server
      :bind ... :port ...
-     :handler (server/default-handler nrepl-pprint-middleware.pprint/wrap-pprint)))
+     :handler (nrepl/default-handler nrepl-pprint-middleware.pprint/wrap-pprint)))
 #+end_src
